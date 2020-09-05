@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using my_Calendar.Models;
 
+// namespace = organizaton of code (name.folder)
 namespace my_Calendar.Controllers
 {
     public class HomeController : Controller
