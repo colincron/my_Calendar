@@ -38,8 +38,56 @@ function fetchTasks() {
     });
 }
 
+function register() {
+    // get values from form
+    let title = $('#txtTitle').val();
+    let notes = $('#txtNotes').val();
+    let imp = $('#chkImportant').is(":checked");
+
+    // validation
+    if(title.length < 5) {
+        alert("Please verify the Title");
+        return;
+    }
+
+    // create an object
+
+    let task = {
+        title: title,
+        notes: notes,
+        important: imp
+    };
+    console.log(task);
+
+    //send object to BE
+    $.ajax({
+        type: 'POST',
+        url: '/api/createTask',
+        data: JSON.stringify(task),
+        contentType: 'application/json',
+        success: res => {
+            console.log("Server says ", res);
+
+            // here
+            // opc 1 = get all thet tasks and render them again
+        },
+        error: details => {
+            console.log("Error", details);
+        }
+    });
+
+    // clear form
+    $('#txtTitle').val("");
+    $('#txtNotes').val("");
+    $('#chkImportant').prop( "checked", false );
+
+}
+
 function init() {
     //console.log("MyCalendar Page");
+
+    // setup events 
+    $("#btnSave").click(register);
 
     fetchTasks();
 }

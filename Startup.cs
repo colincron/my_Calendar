@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using my_Calendar.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace my_Calendar
 {
@@ -24,6 +26,10 @@ namespace my_Calendar
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            // add DB Service
+            string conString = "Data source=MyCalendar.db";
+            services.AddDbContext<DataContext>(options => options.UseSqlite(conString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
